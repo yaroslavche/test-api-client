@@ -1,0 +1,18 @@
+services:
+  api_client_php:
+    container_name: api_client_php
+    build:
+      context: .
+      dockerfile: ./docker/dev/php/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    env_file:
+      - ./.env
+    networks:
+      - network-proxy
+
+networks:
+  network-proxy:
+    name: network
+    external: true
